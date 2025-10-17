@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fábrica de Natal das Donnas - Sua Assistente de Campanhas Natalinas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Quicksand:wght@400;500;600&family=Raleway:wght@800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --vermelho-natal: #c8102e;
+            --verde-natal: #1e5631;
+            --branco: #ffffff;
+            --dourado: #ffd700;
+            --rosa-claro: #f7b5cd;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #1e5631 0%, #0d2918 100%);
+            color: var(--branco);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Neve caindo */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            z-index: 1;
+            color: var(--branco);
+            font-size: 1em;
+            opacity: 0.8;
+            animation: fall linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header/Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+
+        .ornament {
+            display: inline-block;
+            font-size: 2rem;
+            margin: 0 10px;
+            animation: swing 3s ease-in-out infinite;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .hero h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: var(--dourado);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--rosa-claro);
+            margin-bottom: 30px;
+        }
+
+        /* Avatar da Assistente com IMAGEM REAL */
+        .assistant-avatar {
+            width: 280px;
+            height: 280px;
+            margin: 40px auto;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .avatar-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid var(--dourado);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+            background: var(--branco);
+        }
+
+        /* Estrelas decorativas ao redor do avatar */
+        .star {
+            position: absolute;
+            color: var(--dourado);
+            font-size: 2rem;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .star.star1 { 
+            top: 10px; 
+            left: -30px; 
+            animation-delay: 0s; 
+        }
+        
+        .star.star2 { 
+            top: 50%; 
+            right: -35px; 
+            animation-delay: 0.5s;
+            font-size: 2.5rem;
+        }
+        
+        .star.star3 { 
+            bottom: 30px; 
+            left: -25px; 
+            animation-delay: 1s; 
+        }
+
+        .star.star4 { 
+            top: 30px; 
+            right: -20px; 
+            animation-delay: 1.5s;
+            font-size: 1.8rem;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1) rotate(0deg); 
+            }
+            50% { 
+                opacity: 0.4; 
+                transform: scale(1.3) rotate(180deg); 
+            }
+        }
+
+        .hero-description {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--branco);
+        }
+
+        /* Botão Principal */
+        .cta-button {
+            display: inline-block;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            padding: 20px 50px;
+            background: linear-gradient(135deg, var(--vermelho-natal) 0%, #a00d26 100%);
+            color: var(--branco);
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(200, 16, 46, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '✨';
+            position: absolute;
+            left: 20px;
+            font-size: 1.5rem;
+            animation: sparkle-btn 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle-btn {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(200, 16, 46, 0.6);
+            background: linear-gradient(135deg, #e01238 0%, var(--vermelho-natal) 100%);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        /* Seção de Funcionalidades */
+        .features {
+            margin: 60px 0;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--dourado);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '🎁';
+            display: block;
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--dourado);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--dourado);
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--branco);
+        }
+
+        /* Recursos Premium */
+        .resources {
+            background: rgba(200, 16, 46, 0.2);
+            border-radius: 30px;
+            padding: 50px 30px;
+            margin: 60px 0;
+            border: 3px solid var(--vermelho-natal);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .resource-card {
+            background: var(--branco);
+            color: var(--verde-natal);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .resource-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+        }
+
+        .resource-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .resource-card h3 {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--vermelho-natal);
+            margin-bottom: 10px;
+        }
+
+        .resource-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Como Funciona */
+        .how-it-works {
+            margin: 60px 0;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .step {
+            text-align: center;
+            max-width: 250px;
+        }
+
+        .step-number {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            font-size: 3rem;
+            color: var(--dourado);
+            background: var(--vermelho-natal);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 4px solid var(--dourado);
+        }
+
+        .step h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--rosa-claro);
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Final */
+        .final-cta {
+            background: linear-gradient(135deg, var(--vermelho-natal) 0%, #a00d26 100%);
+            border-radius: 30px;
+            padding: 60px 30px;
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '🎄';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.1;
+            top: -50px;
+            left: -50px;
+        }
+
+        .final-cta::after {
+            content: '🎄';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.1;
+            bottom: -50px;
+            right: -50px;
+        }
+
+        .final-cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dourado);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .urgency-badge {
+            display: inline-block;
+            background: var(--dourado);
+            color: var(--verde-natal);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 2px solid rgba(255, 215, 0, 0.3);
+            margin-top: 60px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: var(--rosa-claro);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                flex-direction: column;
+            }
+
+            .assistant-avatar {
+                width: 220px;
+                height: 220px;
+            }
+        }
+
+        /* Efeito de brilho */
+        .shine {
+            animation: shine 2s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Neve caindo -->
+    <div id="snow-container"></div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="ornament">🎄</div>
+            <h1>Fábrica de Natal das Donnas</h1>
+            <div class="ornament">🎄</div>
+            
+            <p class="subtitle">Sua Assistente Inteligente de Campanhas Natalinas</p>
+            
+            <!-- AVATAR COM SUA IMAGEM -->
+            <div class="assistant-avatar">
+                <!-- 
+                    ⚠️ ATENÇÃO: SUBSTITUA O SRC ABAIXO PELA SUA IMAGEM! ⚠️
+                    
+                    OPÇÃO 1: Se a imagem estiver na mesma pasta do HTML:
+                    src="sua-imagem.jpg"
+                    
+                    OPÇÃO 2: Se a imagem estiver online:
+                    src="https://seu-site.com/imagem.jpg"
+                    
+                    OPÇÃO 3: Use a imagem que você enviou e coloque o nome dela aqui
+                -->
+                <img src="avatar-elfo.jpg" alt="Assistente Fábrica de Natal" class="avatar-image">
+                
+                <!-- Estrelas decorativas -->
+                <div class="star star1">✨</div>
+                <div class="star star2">⭐</div>
+                <div class="star star3">✨</div>
+                <div class="star star4">💫</div>
+            </div>
+
+            <div class="hero-description">
+                Especialista em Planejamento, Gestão e Marketing para confeiteiras que querem um <strong>Natal lucrativo e sem caos</strong>. Atua exclusivamente de <strong>Outubro a Janeiro</strong> com estratégias comprovadas.
+            </div>
+        </section>
+
+        <!-- Funcionalidades -->
+        <section class="features">
+            <h2 class="section-title">O que a Assistente faz por você</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">📅</span>
+                    <h3>Planejamento</h3>
+                    <p>Cronogramas por fase (Out-Jan), checklists práticos, organização de catálogo, prazos e políticas.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">📱</span>
+                    <h3>Marketing</h3>
+                    <p>Calendário editorial, roteiros de posts/stories/reels, legendas que convertem e campanhas estratégicas.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">💬</span>
+                    <h3>Vendas</h3>
+                    <p>Textos de catálogo, fluxos de WhatsApp, respostas para objeções, follow-ups e pós-venda.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h3>Gestão</h3>
+                    <p>Precificação natalina, controle de encomendas, limites de produção e políticas claras.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recursos Premium -->
+        <section class="resources">
+            <h2 class="section-title">Recursos Inclusos</h2>
+            
+            <div class="resources-grid">
+                <a href="https://checklist.donnasdaconfeitaria.shop" target="_blank" class="resource-card">
+                    <div class="resource-icon">✅</div>
+                    <h3>Checklist Interativo</h3>
+                    <p>46 tarefas práticas de Outubro a Janeiro para não esquecer nada!</p>
+                </a>
+
+                <a href="https://promptsnatal.donnasdaconfeitaria.shop/" target="_blank" class="resource-card">
+                    <div class="resource-icon">🤖</div>
+                    <h3>50 Prompts de IA</h3>
+                    <p>Comandos prontos para criar conteúdo, legendas e estratégias com inteligência artificial.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Como Funciona -->
+        <section class="how-it-works">
+            <h2 class="section-title">Como Funciona</h2>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Clique no Botão</h3>
+                    <p>Acesse a assistente em uma nova aba do ChatGPT</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Faça sua Pergunta</h3>
+                    <p>Digite o que você precisa: calendário, legendas, roteiros...</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Receba na Hora</h3>
+                    <p>Conteúdo personalizado, pronto para copiar e usar!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <section class="final-cta">
+            <h2 class="shine">Pronta para um Natal Organizado e Lucrativo? 🎄</h2>
+            <p>Acesse agora e comece a planejar sua melhor campanha natalina!</p>
+            
+            <a href="https://chatgpt.com/g/g-68e85923948081918ad1bb8467cf5df9-fabrica-de-natal-das-donnas" target="_blank" class="cta-button">
+                Conversar com a Assistente 🎅
+            </a>
+
+            <div class="urgency-badge">⏰ Válido de Outubro a Janeiro</div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>🎄 Fábrica de Natal das Donnas | Parte oficial da Donnas da Confeitaria 🎄</p>
+        <p style="margin-top: 10px; font-size: 0.85rem;">Desenvolvido com 💖 para confeiteiras que querem um Natal sem caos</p>
+    </footer>
+
+    <script>
+        // Criar flocos de neve
+        function createSnowflakes() {
+            const container = document.getElementById('snow-container');
+            const snowflakeCount = 50;
+            const snowflakes = ['❄️', '❅', '❆'];
+
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                snowflake.style.fontSize = (Math.random() * 0.5 + 0.5) + 'em';
+                container.appendChild(snowflake);
+            }
+        }
+
+        createSnowflakes();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
